@@ -1,12 +1,15 @@
 import { MongoClient } from 'mongodb';
 
-const mongoClient = new MongoClient(process.env.MONGO_URI);
+let mongoClient: MongoClient;
 
-try {
-    mongoClient.connect();
-    console.log("Conexão com o banco de dados estabelecida");
-} catch (error) {
-    console.log("erro ao conectar com o banco");
-}
+const connectToMongo = async () => {
+  mongoClient = new MongoClient(process.env.MONGO_URI_LOCAL);
+  await mongoClient.connect();
+  return mongoClient.db("teste");
+};
 
-export default mongoClient;
+const closeMongoConnection = async () => {
+  await mongoClient.close();
+};
+
+export { connectToMongo, closeMongoConnection };

@@ -12,16 +12,13 @@
 
 // };
 
-// //Regra de Negócio
-// export type AddressEnrollment = {
-//   logradouro: string,
-//   complemento: string,
-//   bairro: string,
-//   cidade: string,
-//   uf: string,
-//   error?: string
-
-// }
+//Regra de Negócio
+export type SolicitationType = {
+  data: string,
+  service: string,
+  name: string,
+  description: string
+}
 
 // export type RequestError = {
 //   status: number,
