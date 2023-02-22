@@ -1,50 +1,44 @@
 import httpStatus  from "http-status";
 import { Response, Request } from "express";
 import { SolicitationType } from "@/protocols";
-import rendezvousService from "@/services/rendezvous-service/index"
+import rendezvousService from "@/services/rendezvous-service/index";
 
 export async function getRendezvous(req: Request, res: Response) {
-
   try {
-    const rendezvous = rendezvousService.getRendezvous();
+    const rendezvous = await rendezvousService.getRendezvous();
     
-    if(!rendezvous){
-      return res.sendStatus(httpStatus.NOT_FOUND)
+    if(!rendezvous) {
+      return res.sendStatus(httpStatus.NOT_FOUND);
     }
 
     return res.status(httpStatus.OK).send(rendezvous);
-  
   } catch (error) {
     if (error.name === "NotFoundError") {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
   }
-  
 }
 
-export async function postRendezvous(req: Request, res:Response){
-
-  const solicitation: SolicitationType = req.body
+export async function postRendezvous(req: Request, res: Response) {
+  const solicitation: SolicitationType = req.body;
 
   try {
-    if(!solicitation){
+    if(!solicitation) {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
   
-    const isCreate = rendezvousService.postRendezvous(solicitation);
-
-    if(!isCreate){
+    const isCreate = await rendezvousService.postRendezvous(solicitation);
+    
+    if(!isCreate) {
       return res.sendStatus(httpStatus.BAD_REQUEST);
     }
   
-    return res.sendStatus(httpStatus.CREATED);
-
+    return res.send(isCreate).status(httpStatus.CREATED);
   } catch (error) {
     if (error.name === "NotFoundError") {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
   }
-  
 }
 
 // export async function getEnrollmentByUser(req: AuthenticatedRequest, res: Response) {

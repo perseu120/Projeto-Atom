@@ -1,15 +1,11 @@
-import { MongoClient } from 'mongodb';
+import { PrismaClient } from "@prisma/client";
 
-let mongoClient: MongoClient;
+export let prisma: PrismaClient;
 
-const connectToMongo = async () => {
-  mongoClient = new MongoClient(process.env.MONGO_URI_LOCAL);
-  await mongoClient.connect();
-  return mongoClient.db("teste");
-};
+export function connectDb(): void {
+  prisma = new PrismaClient();
+}
 
-const closeMongoConnection = async () => {
-  await mongoClient.close();
-};
-
-export { connectToMongo, closeMongoConnection };
+export async function disconnectDb(): Promise<void> {
+  await prisma?.$disconnect();
+}

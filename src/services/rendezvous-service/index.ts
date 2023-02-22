@@ -1,15 +1,12 @@
 import { SolicitationType } from "@/protocols";
-import rendezvousRepository from "@/repositories/rendezvous-repository/index"
+import rendezvousRepository from "@/repositories/rendezvous-repository/index";
 
-function getRendezvous(){
-
-  return rendezvousRepository.getRendezvous();
+async function getRendezvous() {
+  return await rendezvousRepository.getRendezvous();
 }
 
-function postRendezvous(solicitation: SolicitationType){
-  
-  const isCreated = rendezvousRepository.createServiceSolicitation(solicitation);
-
+async function postRendezvous(solicitation: SolicitationType) {
+  const isCreated = await rendezvousRepository.createServiceSolicitation(solicitation);
   return isCreated;
 }
 

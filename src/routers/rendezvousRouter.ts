@@ -5,6 +5,6 @@ const rendezvousRouter = Router();
 
 rendezvousRouter
   .get("/", getRendezvous)
-  .post("/", postRendezvous)
+  .post("/", postRendezvous);
   
 export { rendezvousRouter };

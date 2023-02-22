@@ -11,6 +11,5 @@ app
   .use(cors())
   .use(express.json())
   .use("/rendezvous", rendezvousRouter);
-  
 
 export default app;

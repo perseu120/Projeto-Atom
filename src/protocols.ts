@@ -12,11 +12,12 @@
 
 // };
 
-//Regra de Negócio
+// para solicitar um serviço
 export type SolicitationType = {
   data: string,
   service: string,
   name: string,
+  phone: string,
   description: string
 }
 

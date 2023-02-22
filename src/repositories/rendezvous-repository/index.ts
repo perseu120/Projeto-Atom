@@ -1,20 +1,15 @@
-import { connectToMongo, closeMongoConnection } from "@/config/database";
 import { SolicitationType } from "@/protocols";
 
-async function getRendezvous(){
-
-  const db = await connectToMongo();
-  const collection = db.collection('schedule').find({}).toArray();
-  closeMongoConnection();
-  return collection;
+async function getRendezvous() {
+  return;
 }
 async function createServiceSolicitation(solicitation: SolicitationType) {
-    
+  return;
 }
 
 const rendezvousRepository = {
-    getRendezvous,
-    createServiceSolicitation
+  getRendezvous,
+  createServiceSolicitation
 };
   
 export default rendezvousRepository;
