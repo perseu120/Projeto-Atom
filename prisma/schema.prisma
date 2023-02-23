@@ -14,10 +14,26 @@ model SERVICO {
   id Int @id @default(autoincrement())
   nome String
   duracao DateTime
+  agendamentos AGENDAMENTO[]
 }
 
 model CLIENTE {
   id Int @id @default(autoincrement())
   nome String
+  apelido String
   telefone String @db.VarChar(11)
+  agendamentos AGENDAMENTO[]
+}
+
+model AGENDAMENTO {
+  id Int @id @default(autoincrement())
+  data DateTime
+  hora DateTime
+  status Int @default(0)
+  observacao String @db.Text
+  cliente   CLIENTE @relation(fields: [idcliente], references: [id])
+  idcliente Int
+  servico   SERVICO @relation(fields: [idservico], references: [id])
+  idservico Int
+
 }
